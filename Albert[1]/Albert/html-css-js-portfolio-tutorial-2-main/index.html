@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Albert As | Digital Marketing Portfolio</title>
+
+    <!-- ===== Styles ===== -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+    <style>
+        /* ===== Theme Colors ===== */
+        
+         :root {
+            --bg-color: #ffffff;
+            --text-color: #1a1a1a;
+            --primary-color: #3498db;
+            --accent-color: #2ecc71;
+            --card-bg: #f8f9fa;
+            --nav-bg: rgba(255, 255, 255, 0.95);
+            --shadow-color: rgba(0, 0, 0, 0.1);
+            --gradient: linear-gradient(135deg, #3498db, #2ecc71);
+            --section-padding: 3rem 2rem;
+        }
+        
+        .dark-mode {
+            --bg-color: #121212;
+            --text-color: #f0f0f0;
+            --primary-color: #64b5f6;
+            --accent-color: #4db6ac;
+            --card-bg: #1e1e1e;
+            --nav-bg: rgba(30, 30, 30, 0.95);
+            --shadow-color: rgba(0, 0, 0, 0.3);
+            --gradient: linear-gradient(135deg, #64b5f6, #4db6ac);
+        }
+        
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: "Poppins", sans-serif;
+            transition: background-color 0.3s, color 0.3s;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+        /* ===== Theme Toggle Button ===== */
+        
+        .theme-toggle {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            background: var(--primary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 10px var(--shadow-color);
+            transition: transform 0.3s ease, background 0.3s;
+            z-index: 1000;
+        }
+        
+        .theme-toggle:hover {
+            transform: scale(1.1);
+        }
+        
+        .theme-toggle svg {
+            width: 24px;
+            height: 24px;
+            fill: var(--bg-color);
+        }
+        /* ===== Navigation ===== */
+        
+        nav {
+            background-color: var(--nav-bg);
+            backdrop-filter: blur(10px);
+            padding: 1.2rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 999;
+            transition: all 0.3s;
+            box-shadow: 0 2px 10px var(--shadow-color);
+        }
+        
+        .logo {
+            font-weight: 700;
+            font-size: 1.5rem;
+            /* background: var(--gradient); */
+            /* -webkit-background-clip: text; */
+            /* -webkit-text-fill-color: transparent; */
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 600;
+            transition: color 0.3s;
+            position: relative;
+        }
+        
+        .nav-links a:after {
+            content: "";
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: var(--gradient);
+            transition: width 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+        
+        .nav-links a:hover:after {
+            width: 100%;
+        }
+        /* ===== Cards / Containers ===== */
+        
+        .details-container,
+        .color-container,
+        .skill-item,
+        .project-card,
+        .timeline-content {
+            background-color: var(--card-bg);
+            box-shadow: 0 4px 15px var(--shadow-color);
+            border-radius: 10px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        /* ===== Buttons ===== */
+        
+        .btn {
+            background: var(--primary-color);
+            color: #fff;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: "Poppins", sans-serif;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient( 90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+            background: var(--accent-color);
+        }
+        
+        .btn:hover:before {
+            left: 100%;
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+        }
+        
+        .btn-outline:hover {
+            background: var(--primary-color);
+            color: #fff;
+        }
+        /* ===== Sections ===== */
+        
+        section {
+            padding: var(--section-padding);
+            text-align: center;
+        }
+        
+        .section-header {
+            margin-bottom: 2rem;
+        }
+        
+        .title {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .title:after {
+            content: "";
+            position: absolute;
+            width: 60%;
+            height: 4px;
+            bottom: -10px;
+            left: 20%;
+            background: var(--gradient);
+            border-radius: 2px;
+        }
+        
+        .section-subtitle {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+            color: var(--text-color);
+            opacity: 0.8;
+        }
+        /* ===== Profile Section ===== */
+        
+        #profile {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 90vh;
+            gap: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .section__pic-container {
+            width: 380px;
+            height: 380px;
+            overflow: hidden;
+            border-radius: 50%;
+            box-shadow: 0 10px 30px var(--shadow-color);
+            position: relative;
+            transition: transform 0.5s;
+        }
+        
+        .section__pic-container:hover {
+            transform: scale(1.05);
+        }
+        
+        .section__pic-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .section__text {
+            max-width: 600px;
+        }
+        
+        .section__text p {
+            font-size: 1.2rem;
+            margin: 0.5rem 0;
+        }
+        
+        .section__text .name {
+            font-size: 3rem;
+            font-weight: 700;
+            margin: 0.5rem 0;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .section__text .tagline {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .btn-container {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 1.5rem;
+        }
+        /* ===== About Section ===== */
+        
+        #about {
+            background-color: var(--card-bg);
+        }
+        
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: left;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+        /* ===== Skills Section ===== */
+        
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .skill-item {
+            padding: 1.5rem;
+            text-align: center;
+            transition: transform 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .skill-item:hover {
+            transform: translateY(-5px);
+        }
+        
+        .skill-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+        
+        .skill-item h3 {
+            margin: 0;
+            font-size: 1.1rem;
+        }
+        /* ===== Projects Section ===== */
+        
+        #projects {
+            background-color: var(--card-bg);
+        }
+        
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+            max-width: 1100px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .project-card {
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .project-image {
+            width: 100%;
+            height: 200px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .project-card:hover .project-image img {
+            transform: scale(1.1);
+        }
+        
+        .project-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .project-card:hover .project-overlay {
+            opacity: 1;
+        }
+        
+        .project-links {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .project-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s;
+        }
+        
+        .project-link:hover {
+            transform: scale(1.1);
+            background: var(--accent-color);
+        }
+        
+        .project-info {
+            padding: 1.5rem;
+        }
+        
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            justify-content: center;
+            margin-top: 1rem;
+        }
+        
+        .project-tag {
+            background-color: var(--primary-color);
+            color: #fff;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+        }
+        /* ===== Contact Section ===== */
+        
+        #contact a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+        
+        #contact a:hover {
+            color: var(--accent-color);
+            text-decoration: underline;
+        }
+        
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            padding: 1rem;
+            background: var(--card-bg);
+            border-radius: 10px;
+            box-shadow: 0 4px 10px var(--shadow-color);
+        }
+        
+        .contact-icon {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+        }
+        /* ===== Footer ===== */
+        
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background-color: var(--card-bg);
+            border-top: 1px solid var(--shadow-color);
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--gradient);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s;
+        }
+        
+        .social-link:hover {
+            transform: translateY(-5px);
+        }
+        /* ===== Animations ===== */
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.8s ease forwards;
+        }
+        
+        .delay-1 {
+            animation-delay: 0.2s;
+        }
+        
+        .delay-2 {
+            animation-delay: 0.4s;
+        }
+        
+        .delay-3 {
+            animation-delay: 0.6s;
+        }
+        /* ===== Responsive ===== */
+        
+        @media screen and (min-width: 768px) {
+            #profile {
+                flex-direction: row;
+            }
+            .section__text {
+                text-align: left;
+            }
+            .btn-container {
+                justify-content: flex-start;
+            }
+        }
+        
+        @media screen and (max-width: 768px) {
+            .project-grid {
+                grid-template-columns: 1fr;
+            }
+            nav {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .section__text .name {
+                font-size: 2.5rem;
+            }
+            .title {
+                font-size: 2rem;
+            }
+            .section__pic-container {
+                width: 300px;
+                height: 300px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- ===== Theme Toggle ===== -->
+    <button class="theme-toggle" id="themeToggle">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path
+          d="M12,18A6,6 0 0,1 6,12A6,6 0 0,1 12,6A6,6 0 0,1 18,12A6,6 0 0,1 12,18M20,15.31L23.31,12L20,8.69V4H15.31L12,0.69L8.69,4H4V8.69L0.69,12L4,15.31V20H8.69L12,23.31L15.31,20H20V15.31Z"
+        />
+      </svg>
+    </button>
+
+    <!-- ===== Navigation ===== -->
+    <nav>
+        <div class="logo">
+            <h4></h4>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- ===== Profile Section ===== -->
+    <section id="profile">
+        <div class="section__pic-container fade-in">
+            <img src="./assets/aaa.jpg" alt="Albert As" />
+        </div>
+        <div class="section__text fade-in delay-1">
+            <p>Hello, I'm</p>
+            <h1 class="name">Albert As</h1>
+            <p class="tagline">Digital Marketing Specialist</p>
+            <p>
+                I help businesses grow their online presence and reach their target audience through strategic digital campaigns.
+            </p>
+            <div class="btn-container">
+                <!-- <button class="btn" onclick="window.open('./assets/resume-example.pdf')">Download CV</button> -->
+                <button class="btn" onclick="location.href='#contact'">
+            Contact Info
+          </button>
+                <button class="btn btn-outline" onclick="location.href='#projects'">
+            View Projects
+          </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== About Section ===== -->
+    <section id="about">
+        <div class="section-header fade-in">
+            <h1 class="title">About Me</h1>
+            <p class="section-subtitle">
+                Learn more about my background and expertise
+            </p>
+        </div>
+        <div class="about-content fade-in delay-1">
+            <p>
+                I'm a passionate digital marketing specialist with expertise in social media marketing, content creation, and analytics. I help businesses grow their online presence and reach their target audience through strategic digital campaigns.
+            </p>
+            <p>
+                With a keen eye for trends and data-driven strategies, I've successfully managed campaigns that increased brand awareness, engagement, and conversions for various clients across different industries.
+            </p>
+        </div>
+    </section>
+
+    <!-- ===== Skills Section ===== -->
+    <section id="skills">
+        <div class="section-header fade-in">
+            <h1 class="title">Skills</h1>
+            <p class="section-subtitle">My digital marketing expertise</p>
+        </div>
+        <div class="skills-grid">
+            <div class="skill-item fade-in">
+                <i class="fas fa-hashtag skill-icon"></i>
+                <h3>Social Media Marketing</h3>
+            </div>
+
+            <div class="skill-item fade-in delay-1">
+                <i class="fas fa-pen-nib skill-icon"></i>
+                <h3>Content Creation</h3>
+            </div>
+            <div class="skill-item fade-in delay-2">
+                <i class="fas fa-search skill-icon"></i>
+                <h3>Basic SEO</h3>
+            </div>
+            <div class="skill-item fade-in">
+                <i class="fas fa-ad skill-icon"></i>
+                <h3>Google Ads & Meta Ads</h3>
+            </div>
+            <div class="skill-item fade-in delay-1">
+                <i class="fas fa-envelope skill-icon"></i>
+                <h3>Email Marketing</h3>
+            </div>
+            <div class="skill-item fade-in delay-2">
+                <i class="fas fa-chart-line skill-icon"></i>
+                <h3>Analytics</h3>
+            </div>
+            <div class="skill-item fade-in">
+                <i class="fas fa-palette skill-icon"></i>
+                <h3>Canva / Basic Design</h3>
+            </div>
+            <div class="skill-item fade-in delay-1">
+                <i class="fas fa-comments skill-icon"></i>
+                <h3>Communication Skills</h3>
+            </div>
+            <div class="skill-item fade-in delay-2">
+                <i class="fas fa-video skill-icon"></i>
+                <h3>Basic Video Editing</h3>
+            </div>
+            <div class="skill-item fade-in">
+                <i class="fas fa-chart-bar skill-icon"></i>
+                <h3>Trend Awareness</h3> 
+                    
+                </h3>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== Projects Section ===== -->
+    <section id="projects">
+        <div class="section-header fade-in">
+            <h1 class="title">Projects</h1>
+            <p class="section-subtitle">Some of my recent work</p>
+        </div>
+        <div class="project-grid">
+            <div class="project-card fade-in">
+                <div class="project-image">
+                    <img src="./assets/project-1.png" alt="Project 1" />
+                    <div class="project-overlay">
+                        <div class="project-links">
+                            <a href="#" class="project-link"><i class="fas fa-external-link-alt"></i
+                ></a>
+                            <a href="#" class="project-link"><i class="fab fa-github"></i
+                ></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-info">
+                    <h2>E-Commerce Campaign</h2>
+                    <p>
+                        Social media marketing campaign that increased online sales by 45%.
+                    </p>
+                    <div class="project-tags">
+                        <span class="project-tag">Social Media</span>
+                        <span class="project-tag">Google Ads</span>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card fade-in delay-1">
+                <div class="project-image">
+                    <img src="./assets/project-2.png" alt="Project 2" />
+                    <div class="project-overlay">
+                        <div class="project-links">
+                            <a href="#" class="project-link"><i class="fas fa-external-link-alt"></i
+                ></a>
+                            <a href="#" class="project-link"><i class="fab fa-github"></i
+                ></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-info">
+                    <h2>Brand Awareness Strategy</h2>
+                    <p>
+                        Developed a comprehensive digital strategy that increased brand recognition by 60%.
+                    </p>
+                    <div class="project-tags">
+                        <span class="project-tag">Content Creation</span>
+                        <span class="project-tag">SEO</span>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card fade-in delay-2">
+                <div class="project-image">
+                    <img src="./assets/project-3.png" alt="Project 3" />
+                    <div class="project-overlay">
+                        <div class="project-links">
+                            <a href="#" class="project-link"><i class="fas fa-external-link-alt"></i
+                ></a>
+                            <a href="#" class="project-link"><i class="fab fa-github"></i
+                ></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-info">
+                    <h2>Email Marketing Campaign</h2>
+                    <p>
+                        Created an automated email sequence that improved customer retention by 35%.
+                    </p>
+                    <div class="project-tags">
+                        <span class="project-tag">Email Marketing</span>
+                        <span class="project-tag">Analytics</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== Contact Section ===== -->
+    <section id="contact">
+        <div class="section-header fade-in">
+            <h1 class="title">Contact Me</h1>
+            <p class="section-subtitle">Let's work together</p>
+        </div>
+        <div class="contact-info fade-in delay-1">
+            <div class="contact-item">
+                <i class="fas fa-envelope contact-icon"></i>
+                <p>
+                    Email:
+                    <a href=>albertasalbert41@gmail.com</a>
+                </p>
+            </div>
+            <div class="contact-item">
+                <i class="fab fa-linkedin contact-icon"></i>
+                <p>
+                    LinkedIn:
+                    <a href="https://www.linkedin.com/in/albert-as-88b023383">linkedin.com/in/albertas</a
+            >
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Footer ===== -->
+    <footer>
+      <div class="social-links">
+        <a href="https://www.linkedin.com/in/albert-as-88b023383"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                    <a href="https://www.instagram.com/albert___as___?igsh=bWVkbHQ4OGIxcjI2"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-github"></i></a>
+            </div>
+            <p>© 2023 Albert As. All Rights Reserved.</p>
+            </footer>
+
+            <!-- ===== JavaScript ===== -->
+            <script>
+                const themeToggle = document.getElementById("themeToggle");
+                const body = document.body;
+                const prefersDarkScheme = window.matchMedia(
+                    "(prefers-color-scheme: dark)"
+                );
+                const currentTheme = localStorage.getItem("theme");
+
+                if (
+                    currentTheme === "dark" ||
+                    (!currentTheme && prefersDarkScheme.matches)
+                ) {
+                    body.classList.add("dark-mode");
+                    updateToggleIcon(true);
+                }
+
+                themeToggle.addEventListener("click", () => {
+                    body.classList.toggle("dark-mode");
+                    const theme = body.classList.contains("dark-mode") ? "dark" : "light";
+                    localStorage.setItem("theme", theme);
+                    updateToggleIcon(body.classList.contains("dark-mode"));
+                });
+
+                function updateToggleIcon(isDark) {
+                    const iconPath = themeToggle.querySelector("svg path");
+                    iconPath.setAttribute(
+                        "d",
+                        isDark ?
+                        "M12,2A7,7 0 0,1 19,9C19,11.38 17.81,13.47 16,14.74V17A1,1 0 0,1 15,18H9A1,1 0 0,1 8,17V14.74C6.19,13.47 5,11.38 5,9A7,7 0 0,1 12,2Z" :
+                        "M12,18A6,6 0 0,1 6,12A6,6 0 0,1 12,6A6,6 0 0,1 18,12A6,6 0 0,1 12,18Z"
+                    );
+                }
+
+                // Add scroll animation
+                const observerOptions = {
+                    threshold: 0.1,
+                    rootMargin: "0px 0px -50px 0px",
+                };
+
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach((entry) => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add("fade-in");
+                        }
+                    });
+                }, observerOptions);
+
+                document.querySelectorAll("section > *").forEach((el) => {
+                    observer.observe(el);
+                });
+            </script>
+</body>
+
+</html>
